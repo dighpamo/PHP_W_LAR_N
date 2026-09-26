@@ -1,0 +1,32 @@
+https://www.google.com/search?q=%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8+php&client=firefox-b-d&hs=CdMB&sca_esv=f490e9746bfcf51c&sxsrf=APpeQnuZPt3Wg7iCqVZ4TcPlXYsznZ7vKA%3A1790334800772&ei=UFe2ao_hLtO4hbIP7eHg4Ac&biw=1920&bih=932&ved=2ahUKEwiPydDuzImXAxVTXEEAHe0wGHwQ4dUDegQIBhAM&uact=5&oq=%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8+php&gs_lp=Egxnd3Mtd2l6LXNlcnAiJdC_0L7RgdGC0YDQvtC10L3QuNC1INC80L7QtNC10LvQuCBwaHAyBRAhGKABSLiJAlDeElj9hgJwBngAkAEAmAHhAaAB-R6qAQYwLjI3LjG4AQPIAQD4AQGYAh-gAoUiwgILEC4YgAQYxwEY0QPCAgUQABiABMICBRAuGIAEwgIaEC4YgAQYxwEY0QMYlwUY3AQY3gQY4ATYAQHCAgoQABiABBiKBRhDwgILEC4YgAQYxwEYrwHCAggQABiABBi0B8ICBBAjGCfCAggQLhiABBi0B8ICChAuGIAEGIoFGEPCAhkQLhiABBiKBRhDGJcFGNwEGN4EGOAE2AEBwgIJEAAYgAQYChgLwgIGEAAYFhgewgIHEAAYgAQYDcICChAAGIAEGA0YtAfCAgYQABgeGA3CAgkQIRgKGKABGCrCAgcQIRgKGKABmAMAiAYBugYGCAEQARgUkgcGMy4yNy4xoAeE-QGyBwYwLjI3LjG4B-ohwgcJMi0xMC4xOS4yyAeaAoAIAQ&sclient=gws-wiz-serp - запрос на то как модели с бд на чистом
+https://www.php.net/manual/ru/book.pdo.php (PDO - php data objects || обращение к объектам бд в случае чистого php)
+https://www.php.net/manual/ru/language.oop5.basic.php - структура для построения класса
+https://ru.stackoverflow.com/questions/850237/%D0%9A%D0%B0%D0%BA-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-%D1%80%D0%BE%D1%83%D1%82%D0%B8%D0%BD%D0%B3-%D0%B2-%D1%81%D0%B2%D0%BE%D1%91%D0%BC-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B5 - ответ на вопрос по роутингу
+https://www.google.com/search?q=%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0+%D1%80%D0%BE%D1%83%D1%82%D0%B8%D0%BD%D0%B3%D0%B0+php+%D1%81+%D0%B2%D1%8B%D0%B2%D0%BE%D0%BC+%D0%BD%D0%B0+view&client=firefox-b-d&hs=ndMB&sca_esv=f490e9746bfcf51c&sxsrf=APpeQntcuYabv3SfUg1cGFGn8oxB7rrxXQ%3A1790337008808&ei=8F-2auX0MM68wPAPz8Di2Qg&biw=1920&bih=932&ved=2ahUKEwjlrMCL1YmXAxVOHhAIHU-gOIsQ4dUDegQIBhAM&uact=5&oq=%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0+%D1%80%D0%BE%D1%83%D1%82%D0%B8%D0%BD%D0%B3%D0%B0+php+%D1%81+%D0%B2%D1%8B%D0%B2%D0%BE%D0%BC+%D0%BD%D0%B0+view&gs_lp=Egxnd3Mtd2l6LXNlcnAiP9C90LDRgdGC0YDQvtC50LrQsCDRgNC-0YPRgtC40L3Qs9CwIHBocCDRgSDQstGL0LLQvtC8INC90LAgdmlldzIJECEYChigARgqMgcQIRgKGKABMgcQIRgKGKABMgcQIRgKGKABSJpMUOkGWINKcAV4AZABAJgBqAGgAcEbqgEEMC4yN7gBA8gBAPgBAZgCIKACsR7CAgoQABhHGNYEGLADwgIFECEYoAHCAgQQIRgKmAMAiAYBkAYDkgcENS4yN6AHy5YBsgcEMC4yN7gH_B3CBwYyLTI3LjXIB8cBgAgB&sclient=gws-wiz-serp - настройка роутинга через файлы (чтобы код оставался в view)
+https://www.google.com/search?client=firefox-b-d&q=%D0%BA%D0%B0%D0%BA+%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%81%D1%8F+%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C+%D0%B4%D0%BB%D1%8F+%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B+%D1%81+%D0%B1%D0%B4+php - взял для первичной основы построение модели БД: 
+<?php
+
+class UserModel {
+    private PDO $db;
+
+    public function __construct() {
+        $this->db = Database::getConnection();
+    }
+
+    // Получить пользователя по ID
+    public function getById(int $id): ?array {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+    // Добавить нового пользователя
+    public function create(string $name, string $email): bool {
+        $stmt = $this->db->prepare("INSERT INTO users (name, email) VALUES (:name, :email)");
+        return $stmt->execute(['name' => $name, 'email' => $email]);
+    }
+}
+https://www.php.net/manual/en/class.pdo.php - просмотр информации о PDO классе с комментариями под ним и примерами.
+https://www.google.com/search?q=%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+database+php&oq=%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+database+&gs_lcrp=EgZjaHJvbWUqBwgBECEYoAEyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRifBTIHCAUQIRifBTIHCAYQIRifBTIHCAcQIRifBTIHCAgQIRifBTIHCAkQIRifBdIBCDQ5ODJqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8 - как выглядит структура для класса Database
+https://metanit.com/php/mysql/2.1.php - ещё материал про то что такое PDO и как с ним работают
+https://www.google.com/search?client=firefox-b-d&hs=CnMB&sca_esv=f1b31b109bb53223&sxsrf=APpeQntgJK33JLGxtEtmXrUfUvnzATkUyA:1790372006237&q=%D0%BA%D0%B0%D0%BA+%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%81%D1%8F+%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80+php&sa=X&ved=2ahUKEwi_88m714qXAxWyGRAIHZ3_McoQ7xYoAHoECBEQAQ&biw=1920&bih=932&dpr=1 - работа с контроллером

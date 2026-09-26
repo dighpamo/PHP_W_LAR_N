@@ -1,0 +1,35 @@
+# Composer
+/vendor/
+composer.phar
+
+# Окружение (секреты)
+/.env
+.env.local
+.env.*.local
+
+# Логи и кэш
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
+
+# Пользовательские загрузки (если есть)
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+
+# IDE / редакторы
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# ОС
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Временные файлы
+*.log
+*.tmp
+*.bak
