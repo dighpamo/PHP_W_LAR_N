@@ -1,39 +1,52 @@
 <?php
+use Controllers\ArticleController;
 
 define('BASE_PATH', dirname(__DIR__));
 require BASE_PATH . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
+$dotenv->load();
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-use Controllers\ArticleController;
+if (strlen($requestUri) > 1) {
+    $requestUri = rtrim($requestUri, '/');
+}
+
+ 
+if ($requestUri === "/articles/" || $requestUri === "/articles") {
+    header('Location: /');
+    exit;
+}
+
+if (str_starts_with($requestUri, "/articles/")) {
+    $slug = substr($requestUri, strlen('/articles/'));
+    (new ArticleController())->show($slug);
+    exit;
+}
+
+// if ($requestUri === "/admin/articles/")
 
 switch ($requestUri) {
     case '/':
-    case '/home':
         (new ArticleController())->showAll();
-        break;
-
-    case (str_starts_with($requestUri, '/articles/')):
-        $slug = substr($requestUri, strlen('/articles/'));
-        (new ArticleController())->show($slug);
         break;
 
     case '/login':
         break;
 
-    case '/articles/form':
+    case '/admin/articles/form':
         break;
 
-    case '/categories/list':
+    case '/admin/categories/':
         break;
 
-    case '/users/list':
+    case '/admin/users/':
         break;
 
-    case '/users/form':
+    case '/admin/users/form':
         break;
 
-    case '/settings/form':
+    case '/admin/settings/form':
         break;
 
     case '/article':

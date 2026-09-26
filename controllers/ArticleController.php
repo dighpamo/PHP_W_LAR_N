@@ -23,7 +23,20 @@ class ArticleController {
         if (is_null($article)) {
             http_response_code(404);
             renderView('404', ['title' => 'Страница не найдена']);
+            return;
         }
         renderView('public/article', ['article' => $article]);
+    }
+
+    public function edit(int $id, array $values): void {
+        $this->model->update($id, $values);
+        header('Location: admin/articles/' . $id);
+        exit;
+    }
+
+    public function delete(int $id): void {
+        $this->model->delete($id);
+        header('Location: /admin/articles/');
+        exit;
     }
 }

@@ -9,7 +9,8 @@ function renderView(string $viewName, $data = []): void
     if (file_exists($viewPath)) {
         include $viewPath;
     } else {
-        http_response_code(404);
-        ['title' => 'Страница не найдена'];
+        http_response_code(500);
+        echo 'Ошибка сервера';
+        exit;
     }
 }

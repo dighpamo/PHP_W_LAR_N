@@ -45,14 +45,48 @@ class CategoryModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getBySlug(string $slug): array
+    {
+        $stmt = $this->db->prepare("SELECT * FROM categories WHERE slug = :slug");
+        $stmt->execute(['slug' => $slug]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function delete(int $id): bool {
         $stmt = $this->db->prepare("DELETE FROM categories WHERE id = :id");
         return $stmt->execute(['id' => $id]);
     }
 
-    public function getAll(): array
+    public function update(int $id, array $values): bool
     {
-        $stmt = $this->db->prepare("SELECT * FROM categories ORDER BY id");
+        if (empty($values)) {
+            return false;
+        }
+        if (array_intersect(self::BLOCKED, array_keys($values))) {
+            return false;
+        }
+        $cont = array();
+        foreach (array_keys($values) as $k) {
+            $cont[] = $k . '= :' . $k;
+        }
+        $stmt = $this->db->prepare("UPDATE categories SET " . implode(", ", $cont) . " WHERE id = :id");
+        $values['id'] = $id;
+        return $stmt->execute($values);
+    }
+
+    public function getAll(int $page = 1, int $perPage = 10): array
+    {
+        if ($page < 1) {
+            $page = 1;
+        }
+        $stmt = $this->db->prepare(
+            "SELECT * 
+            FROM categories 
+            ORDER BY id
+            LIMIT :perPage 
+            OFFSET :page");
+        $stmt->bindValue('page', ($page - 1) * $perPage, PDO::PARAM_INT);
+        $stmt->bindValue('perPage', $perPage, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
