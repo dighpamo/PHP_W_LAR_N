@@ -22,7 +22,7 @@ class ArticleController {
         $article = $this->model->getBySlug($slug);
         if (is_null($article)) {
             http_response_code(404);
-            renderView('404', ['title' => 'Страница не найдена']);
+            renderView('404');
             return;
         }
         renderView('public/article', ['article' => $article]);
@@ -38,5 +38,11 @@ class ArticleController {
         $this->model->delete($id);
         header('Location: /admin/articles/');
         exit;
+    }
+
+    public function checkView(string $slug): void {
+        if ($_SESSION['user_id'] ?? false && $_SESSION['username'] ?? false) {
+            $this->model->inceaseArticleCount($slug);
+        }
     }
 }
