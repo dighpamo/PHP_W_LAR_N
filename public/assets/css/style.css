@@ -406,3 +406,61 @@ footer {
         min-width: 100%;
     }
 }
+
+/* ============================================
+   Табы авторизации (CSS-only)
+   ============================================ */
+
+.auth-tab-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1.25rem;
+    padding: 0.25rem;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+}
+
+.auth-tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4b5563;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.auth-tab:hover {
+    color: #111827;
+}
+
+.auth-panel {
+    display: none;
+}
+
+/* Показываем нужную форму в зависимости от выбранного radio */
+#tab-login:checked~.auth-panel--login {
+    display: block;
+}
+
+#tab-register:checked~.auth-panel--register {
+    display: block;
+}
+
+/* Подсветка активного таба */
+#tab-login:checked~.auth-tabs label[for="tab-login"],
+#tab-register:checked~.auth-tabs label[for="tab-register"] {
+    background-color: #ffffff;
+    color: #111827;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
