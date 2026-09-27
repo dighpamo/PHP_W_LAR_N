@@ -1,3 +1,6 @@
+<?php use Controllers\AuthController; ?>
+
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -19,7 +22,7 @@
                 <a href="/creaters">Авторы</a>
             </div>
 
-            <?php if (is_null($_SESSION['user_id'])): ?>
+            <?php if (!(new AuthController())->checkAuth()): ?>
                 <details class="dropdown">
                     <summary class="dropdown-toggle">Войти</summary>
                     <div class="dropdown-menu">
