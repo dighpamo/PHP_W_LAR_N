@@ -218,4 +218,10 @@ class ArticleModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getTotalCount(): int {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM articles");
+        $stmt->execute();
+        return (int)$stmt->fetchColumn();
+    }
 }

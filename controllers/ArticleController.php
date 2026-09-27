@@ -16,11 +16,20 @@ class ArticleController {
     public function showAll(): void {
         $page = (int)($_GET['page'] ?? 1);
         $perPage = (int)($_GET['perPage'] ?? 10) === 10 ? 10 : 10;
+        $totalCount = $this->model->getTotalCount();
+        $totalPages = (int)ceil($totalCount / $perPage);
+        if ($page > $totalPages) {
+            http_response_code(404);
+            renderView('404');
+            exit;
+        }
         renderView(
             'public/home',
             [
                 'articles' => $this->model->getAll($page, $perPage),
-                'categories' => (new CategoryModel())->getAll()
+                'categories' => (new CategoryModel())->getAll(),
+                'totalPages' => $totalPages,
+                'currentPage' => $page,
             ]
         );
     }
