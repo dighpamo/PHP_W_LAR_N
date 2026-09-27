@@ -41,24 +41,27 @@ class ArticleModel {
         $value = preg_match('/[a-zA-Zа-яА-Я]/u', $value);
         return empty($value);
     }
-    public function getById(int $id): array {
-        $stmt = $this->db->prepare("SELECT * FROM articles WHERE id = :id");
+
+    public function getById(int $id): ?array {
+        $stmt = $this->db->prepare(
+            "SELECT a.*, c.slug AS category_slug, c.category_name
+            FROM articles a
+            LEFT JOIN categories c ON a.category_id = c.id
+            WHERE a.id = :id"
+        );
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getBySlug(string $slug): array
     {
-        $stmt = $this->db->prepare("SELECT * FROM articles WHERE slug = :slug");
-        $stmt->execute(['slug' => $slug]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public function getPreview(int $id): array {
         $stmt = $this->db->prepare(
-            "SELECT title, slug, LEFT(content, 100) as preview, image_path, category_id, views_count
-            FROM articles WHERE id = :id");
-        $stmt->execute(['id' => $id]);
+            "SELECT a.*, c.category_name, c.slug AS category_slug 
+            FROM articles a
+            LEFT JOIN categories c ON a.category_id = c.id
+            WHERE a.slug = :slug"
+        );
+        $stmt->execute(['slug' => $slug]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -67,9 +70,11 @@ class ArticleModel {
             $page = 1;
         }
         $stmt = $this->db->prepare(
-            "SELECT title, slug, LEFT(content, 100) as preview, image_path, category_id, views_count  
-            FROM articles 
-            WHERE category_id = :category_id 
+            "SELECT a.title, a.slug, LEFT(a.content, 100) as preview, a.image_path, a.category_id, a.views_count, 
+            c.category_name, c.slug as category_slug 
+            FROM articles a
+            LEFT JOIN categories c ON a.category_id = c.id
+            WHERE a.category_id = :category_id 
             LIMIT :perPage 
             OFFSET :page"
         );
@@ -104,8 +109,10 @@ class ArticleModel {
             $page = 1;
         }
         $stmt = $this->db->prepare(
-            "SELECT title, slug, LEFT(content, 100) as preview, image_path, category_id, views_count  
-            FROM articles
+            "SELECT a.title, a.slug, LEFT(a.content, 100) as preview, a.image_path, a.category_id, a.views_count,
+            c.category_name, c.slug AS category_slug 
+            FROM articles a
+            LEFT JOIN categories c ON a.category_id = c.id
             LIMIT :perPage 
             OFFSET :page"
         );
@@ -128,6 +135,9 @@ class ArticleModel {
         if (array_intersect(self::BLOCKED, array_keys($values))) {
             return false;
         }
+        if (($values['category_id'] ?? '') === '') {
+            $values['category_id'] = null;
+        }
         $cont = array();
         foreach (array_keys($values) as $k) {
             $cont[] = $k . '= :' . $k;
@@ -146,6 +156,10 @@ class ArticleModel {
         }
         if ($this->checkValue($values['title']) || $this->checkValue($values['content'])) {
             return false;
+        }
+
+        if (($values['category_id'] ?? '') === '') {
+            $values['category_id'] = null;
         }
 
         $title = $values['title'];
@@ -177,8 +191,31 @@ class ArticleModel {
             $cont[] = ':' . $k;
             $val[] = $k;
         }
-        $stmt = $this->db->prepare("INSERT INTO articles (" . implode(", ", $val)  . ") VALUES " . implode(", ", $cont));
+        $stmt = $this->db->prepare("INSERT INTO articles (" . implode(", ", $val)  . ") VALUES (" . implode(", ", $cont) . ")");
         return $stmt->execute($values);
         
+    }
+
+    public function inceaseArticleCount(string $slug): bool {
+        $stmt = $this->db->prepare("UPDATE articles SET views_count + 1 WHERE slug = :slug");
+        return $stmt->execute(['slug' => $slug]);
+    }
+
+    public function getAdminIndexes(int $page = 1, int $perPage = 10): array
+    {
+        if ($page < 1) {
+            $page = 1;
+        }
+        $stmt = $this->db->prepare(
+            "SELECT id, title, views_count  
+            FROM articles
+            ORDER BY id
+            LIMIT :perPage 
+            OFFSET :page"
+        );
+        $stmt->bindValue('page', ($page - 1) * $perPage, PDO::PARAM_INT);
+        $stmt->bindValue('perPage', $perPage, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

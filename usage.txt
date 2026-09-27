@@ -30,3 +30,8 @@ https://www.php.net/manual/en/class.pdo.php - просмотр информац�
 https://www.google.com/search?q=%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+database+php&oq=%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5+database+&gs_lcrp=EgZjaHJvbWUqBwgBECEYoAEyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRifBTIHCAUQIRifBTIHCAYQIRifBTIHCAcQIRifBTIHCAgQIRifBTIHCAkQIRifBdIBCDQ5ODJqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8 - как выглядит структура для класса Database
 https://metanit.com/php/mysql/2.1.php - ещё материал про то что такое PDO и как с ним работают
 https://www.google.com/search?client=firefox-b-d&hs=CnMB&sca_esv=f1b31b109bb53223&sxsrf=APpeQntgJK33JLGxtEtmXrUfUvnzATkUyA:1790372006237&q=%D0%BA%D0%B0%D0%BA+%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%81%D1%8F+%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80+php&sa=X&ved=2ahUKEwi_88m714qXAxWyGRAIHZ3_McoQ7xYoAHoECBEQAQ&biw=1920&bih=932&dpr=1 - работа с контроллером
+https://habr.com/ru/articles/665602/ - как делается авторизация\регистрация
+
+Вопрос - ялвяется ли всё взаимодействие открытым, как API или это всё внутренее.
+https://www.google.com/search?client=firefox-b-d&q=%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0+%D1%81+%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC+php
+https://www.google.com/search?client=firefox-b-d&q=%D0%BA%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C+%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5+%D0%B2+%D0%BD%D1%83%D0%B6%D0%BD%D1%8B%D0%B9+%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82+php

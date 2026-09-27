@@ -1,10 +1,18 @@
 <?php
-use Controllers\ArticleController;
+
 
 define('BASE_PATH', dirname(__DIR__));
 require BASE_PATH . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
 $dotenv->load();
+
+use Controllers\ArticleController;
+use Controllers\AuthController;
+use Controllers\UserController;
+use Controllers\AdminArticleController;
+
+session_start();
+$user_id = $_SESSION['user_id'] ?? null;
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -24,14 +32,67 @@ if (str_starts_with($requestUri, "/articles/")) {
     exit;
 }
 
-// if ($requestUri === "/admin/articles/")
+if ($requestUri === "/login" && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    (new AuthController())->redirectAuth();
+
+    (new UserController())->login($_POST['username'] ?? '', $_POST['password'] ?? '');
+    exit;
+    
+}
+
+if ($requestUri === "/registration" && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    (new AuthController())->redirectAuth();
+
+    (new UserController())->registration($_POST['username'] ?? '', $_POST['password'] ?? '');
+    exit;
+}
+
+if ($requestUri == "/logout" && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    (new UserController())->logout();
+    exit;
+}
+
+if (str_starts_with($requestUri, '/admin')) {
+    (new AuthController())->requireAuth();
+
+    
+    if (($requestUri === '/admin' || $requestUri === '/admin/articles') && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminArticleController())->showAll();
+        exit;
+    }
+    
+    if ($requestUri === '/admin/articles/create' && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminArticleController())->getForm();
+        exit;
+    }
+
+    if ($requestUri === '/admin/articles' && $_SERVER["REQUEST_METHOD"] === "POST") {
+        (new AdminArticleController())->create($_POST);
+        exit;
+    }
+
+    if (preg_match('#^/admin/articles/(\d+)/delete$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "POST") {
+        (new AdminArticleController())->delete((int)$m[1]);
+        exit;
+    }
+
+    if (preg_match('#^/admin/articles/(\d+)$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminArticleController())->show((int)$m[1]);
+        exit;
+    }
+    if (preg_match('#^/admin/articles/(\d+)$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "POST") {
+        (new AdminArticleController())->edit((int)$m[1], $_POST);
+        exit;
+    }
+
+    http_response_code(404);
+    renderView('404');
+    exit;
+}
 
 switch ($requestUri) {
     case '/':
         (new ArticleController())->showAll();
-        break;
-
-    case '/login':
         break;
 
     case '/admin/articles/form':
@@ -56,7 +117,6 @@ switch ($requestUri) {
         break;
 
     default:
-        // Если маршрут не найден (404)
-        renderView('404', ['title' => 'Страница не найдена']);
+        renderView('404');
         break;
 }

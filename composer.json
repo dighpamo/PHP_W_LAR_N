@@ -13,7 +13,9 @@
             "Models\\": "models/"
         },
         "files": [
-            "src/url_config.php"
+            "src/url_config.php",
+            "src/alert.php",
+            "src/ImageUploader.php"
         ]
     }
 }

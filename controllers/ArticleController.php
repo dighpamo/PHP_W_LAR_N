@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\ArticleModel;
+use Models\CategoryModel;
 
 class ArticleController {
     private ArticleModel $model;
@@ -15,7 +16,13 @@ class ArticleController {
     public function showAll(): void {
         $page = (int)($_GET['page'] ?? 1);
         $perPage = (int)($_GET['perPage'] ?? 10) === 10 ? 10 : 10;
-        renderView('public/home', ['articles' => $this->model->getAll($page, $perPage)]);
+        renderView(
+            'public/home',
+            [
+                'articles' => $this->model->getAll($page, $perPage),
+                'categories' => (new CategoryModel())->getAll()
+            ]
+        );
     }
 
     public function show(string $slug): void {
