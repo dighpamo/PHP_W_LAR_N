@@ -1,27 +1,39 @@
-<?php /** @var array $articles */ ?>
-<!DOCTYPE html>
-<html lang="ru">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <title>Статьи</title>
-</head>
+/** @var array $articles */ ?>
 
-<body>
+<?php require BASE_PATH . '/views/partials/header.php'; ?>
+
+<main class="site-main">
+    <h1 class="page-title">Статьи</h1>
+
     <?php if ($articles): ?>
-        <?php foreach ($articles as $article): ?>
-            <div>
-                <div><?= htmlspecialchars($article['title']) ?></div>
-                <div><?= htmlspecialchars($article['preview']) ?></div>
-                <div><?= htmlspecialchars($article['slug']) ?></div>
-                <div><?= htmlspecialchars($article['image_path']) ?></div>
-                <div><?= htmlspecialchars($article['category_id']) ?></div>
-                <div><?= htmlspecialchars($article['views_count']) ?></div>
-            </div>
-        <?php endforeach; ?>
+        <div class="article-list">
+            <?php foreach ($articles as $article): ?>
+                <article class="article-card">
+                    <div class="article-card__image">
+                        <?php if ($article['image_path']): ?>
+                            <img src="<?= htmlspecialchars($article['image_path']) ?>" alt="<?= htmlspecialchars($article['title']) ?>">
+                        <?php else: ?>
+                            <img src="/uploads/House.png" alt="<?= $article['title'] ?>">
+                        <?php endif; ?>
+                    </div>
+                    <h2 class="article-card__title">
+                        <a href="/articles/<?= htmlspecialchars($article['slug']) ?>">
+                            <?= htmlspecialchars($article['title']) ?>
+                        </a>
+                    </h2>
+                    <p class="article-card__preview"><?= htmlspecialchars($article['preview']) ?></p>
+                    <div class="article-card__meta">
+                        <span>Просмотров: <?= htmlspecialchars($article['views_count']) ?></span>
+                        <a href="/categories/<?= htmlspecialchars($article['category_slug']) ?>">Категория: <?= htmlspecialchars($article['category_name'] ?? 'Без категории') ?></a>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        </div>
     <?php else: ?>
-        <div>Тут пока ничего нет</div>
+        <div class="empty-state">Тут пока ничего нет</div>
     <?php endif; ?>
-</body>
+</main>
 
-</html>
+<?php require BASE_PATH . '/views/partials/footer.php'; ?>
