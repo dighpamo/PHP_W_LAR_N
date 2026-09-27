@@ -5,16 +5,18 @@
 <?php require BASE_PATH . '/views/admin_partials/header.php'; ?>
 
 <main class="site-main">
-    <h1 class="page-title">Статьи</h1>
-    <a href="/admin/articles/create">Создать новую статью</a>
+
+    <div class="page-header">
+        <h1 class="page-title">Статьи</h1>
+        <a href="/admin/articles/create" class="btn btn--primary">Создать новую статью</a>
+    </div>
 
     <?php if ($articles): ?>
         <div class="article-list">
             <?php foreach ($articles as $article): ?>
                 <article class="article-card">
                     <h2 class="article-card__title">
-                        <a href="/admin/articles/<?= $article['id'] ?>"> <!-- htmlspecialchars($article['id']) - спросить Никиту, если не успею сам посмотреть -->
-
+                        <a href="/admin/articles/<?= $article['id'] ?>">
                             <?= htmlspecialchars($article['title']) ?>
                         </a>
                     </h2>
@@ -27,6 +29,7 @@
     <?php else: ?>
         <div class="empty-state">Тут пока ничего нет</div>
     <?php endif; ?>
+
 </main>
 
 <?php require BASE_PATH . '/views/admin_partials/footer.php'; ?>
