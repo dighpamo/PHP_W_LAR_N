@@ -39,10 +39,20 @@ class AdminArticleController {
 // Спросить Никиту про сессии, значения и какая практика лучше header(...) или явное $this->method
     public function edit(int $id, array $values): void 
     {
+        if ($_FILES['image_path']['error'] !== UPLOAD_ERR_NO_FILE) {
+            try {
+                ImageUploader::verify_image($_FILES['image_path']);
+                $values['image_path'] = ImageUploader::save_file($_FILES['image_path']);
+            } catch (\Exception $e) {
+                $_SESSION['flash'] = $e->getMessage();
+                exit;
+            }
+        }
         try {
             $this->model->update($id, $values);
         } catch (\PDOException $e) {
-            $_SESSION['flash'] = "Что-то пошло не так.";
+            // $_SESSION['flash'] = "Что-то пошло не так.";
+            $_SESSION['flash'] = $e->getMessage();
         }
         header('Location: /admin/articles/' . $id);
         exit;
@@ -56,6 +66,7 @@ class AdminArticleController {
                 
             } catch (\Exception $e) {
                 $_SESSION['flash'] = $e->getMessage();
+                exit;
             }
         }
         try {

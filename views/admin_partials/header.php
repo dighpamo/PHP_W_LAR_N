@@ -39,6 +39,7 @@ use Controllers\AuthController; ?>
 
                         <div class="auth-panel auth-panel--login">
                             <form method="post" action="/login" class="auth-form">
+                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
                                 <div class="form-group">
                                     <label for="login-username">Имя пользователя</label>
                                     <input type="text" id="login-username" name="username" required maxlength="255">
@@ -53,6 +54,7 @@ use Controllers\AuthController; ?>
 
                         <div class="auth-panel auth-panel--register">
                             <form method="post" action="/registration" class="auth-form">
+                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
                                 <div class="form-group">
                                     <label for="registration-username">Имя пользователя</label>
                                     <input type="text" id="registration-username" name="username" required maxlength="255">
@@ -69,6 +71,7 @@ use Controllers\AuthController; ?>
                 </details>
             <?php else: ?>
                 <form method="post" action="/logout" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
                     <button type="submit">Выйти</button>
                 </form>
             <?php endif; ?>

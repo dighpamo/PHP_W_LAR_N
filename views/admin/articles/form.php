@@ -15,15 +15,15 @@
 
         <?php if (!$toCreate): ?>
             <form class="inline-form" method="post" action="<?= '/admin/articles/' . $article['id'] . '/delete' ?>">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
                 <button type="submit" class="btn btn--danger">Удалить</button>
             </form>
         <?php endif; ?>
     </div>
 
     <form class="form-card"
-        method="post"
-        action="<?= $toCreate ? '/admin/articles' : '/admin/articles/' . $article['id'] ?>"
-        enctype="multipart/form-data">
+        method="post" action="<?= $toCreate ? '/admin/articles' : '/admin/articles/' . $article['id'] ?>" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 
         <?php if (!$toCreate): ?>
             <div class="info-grid">

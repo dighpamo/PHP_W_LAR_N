@@ -15,6 +15,7 @@ class ImageUploader {
         if ($file['error']) {
             throw new \Exception("Ошибка файла");
         }
+        
         if ($file['size'] > 5 * 1024 * 1024) {
             throw new \Exception("Изображение слишком много весит");
         }

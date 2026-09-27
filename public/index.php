@@ -12,6 +12,22 @@ use Controllers\UserController;
 use Controllers\AdminArticleController;
 
 session_start();
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $token = $_POST['csrf_token'] ?? '';
+    if (($_SESSION['csrf_token'] ?? '') !== $token) {
+        $_SESSION['flash'] = "Привет";
+        // http_response_code(403); <-- так будет правильно
+        header('Location: /');
+        exit;
+    }
+    unset($_POST['csrf_token']);
+}
+
 $user_id = $_SESSION['user_id'] ?? null;
 
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

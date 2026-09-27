@@ -50,6 +50,9 @@ class UserController
         $user_id = $this->model->login($username, $password);
         if (is_int($user_id)){
             $_SESSION['user_id'] = $user_id;
+
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
             header("Location: /");
             exit;
         } else {
