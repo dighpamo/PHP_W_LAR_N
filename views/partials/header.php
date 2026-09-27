@@ -24,29 +24,41 @@
                     <summary class="dropdown-toggle">Войти</summary>
                     <div class="dropdown-menu">
 
-                        <form method="post" action="/login" class="auth-form">
-                            <div class="form-group">
-                                <label for="login-username">Имя пользователя</label>
-                                <input type="text" id="login-username" name="username" required maxlength="255">
-                            </div>
-                            <div class="form-group">
-                                <label for="login-password">Пароль</label>
-                                <input type="password" id="login-password" name="password" required minlength="8">
-                            </div>
-                            <button type="submit">Войти</button>
-                        </form>
+                        <input type="radio" name="auth-tab" id="tab-login" class="auth-tab-input" checked>
+                        <input type="radio" name="auth-tab" id="tab-register" class="auth-tab-input">
 
-                        <form method="post" action="/registration" class="auth-form">
-                            <div class="form-group">
-                                <label for="registration-username">Имя пользователя</label>
-                                <input type="text" id="registration-username" name="username" required maxlength="255">
-                            </div>
-                            <div class="form-group">
-                                <label for="registration-password">Пароль</label>
-                                <input type="password" id="registration-password" name="password" required minlength="8">
-                            </div>
-                            <button type="submit">Зарегистрироваться</button>
-                        </form>
+                        <div class="auth-tabs">
+                            <label for="tab-login" class="auth-tab">Вход</label>
+                            <label for="tab-register" class="auth-tab">Регистрация</label>
+                        </div>
+
+                        <div class="auth-panel auth-panel--login">
+                            <form method="post" action="/login" class="auth-form">
+                                <div class="form-group">
+                                    <label for="login-username">Имя пользователя</label>
+                                    <input type="text" id="login-username" name="username" required maxlength="255">
+                                </div>
+                                <div class="form-group">
+                                    <label for="login-password">Пароль</label>
+                                    <input type="password" id="login-password" name="password" required minlength="8">
+                                </div>
+                                <button type="submit">Войти</button>
+                            </form>
+                        </div>
+
+                        <div class="auth-panel auth-panel--register">
+                            <form method="post" action="/registration" class="auth-form">
+                                <div class="form-group">
+                                    <label for="registration-username">Имя пользователя</label>
+                                    <input type="text" id="registration-username" name="username" required maxlength="255">
+                                </div>
+                                <div class="form-group">
+                                    <label for="registration-password">Пароль</label>
+                                    <input type="password" id="registration-password" name="password" required minlength="8">
+                                </div>
+                                <button type="submit">Зарегистрироваться</button>
+                            </form>
+                        </div>
 
                     </div>
                 </details>
