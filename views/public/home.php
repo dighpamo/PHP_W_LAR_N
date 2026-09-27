@@ -1,6 +1,8 @@
 <?php
 
-/** @var array $articles */ ?>
+/** @var array $articles */
+/** @var int $totalPages */
+/** @var int $currentPage */ ?>
 
 <?php require BASE_PATH . '/views/partials/header.php'; ?>
 
@@ -15,7 +17,7 @@
                         <?php if ($article['image_path']): ?>
                             <img src="<?= htmlspecialchars($article['image_path']) ?>" alt="<?= htmlspecialchars($article['title']) ?>">
                         <?php else: ?>
-                            <img src="/uploads/House.png" alt="<?= $article['title'] ?>">
+                            <img src="/uploads/House.png" alt="<?= htmlspecialchars($article['title']) ?>">
                         <?php endif; ?>
                     </div>
                     <h2 class="article-card__title">
@@ -34,6 +36,20 @@
     <?php else: ?>
         <div class="empty-state">Тут пока ничего нет</div>
     <?php endif; ?>
+    <?php if ($totalPages > 1): ?>
+        <div class="pagination">
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php if ($i == $currentPage): ?>
+                    <!-- Текущая активная страница (без ссылки) -->
+                    <span class="page-item active"><?= $i ?></span>
+                <?php else: ?>
+                    <!-- Ссылка на другую страницу -->
+                    <a class="page-item" href="?page=<?= $i ?>"><?= $i ?></a>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+    <?php endif; ?>
+
 </main>
 
 <?php require BASE_PATH . '/views/partials/footer.php'; ?>
