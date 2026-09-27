@@ -35,6 +35,10 @@ class ArticleController {
     }
 
     public function show(string $slug): void {
+        if (!isset($_SESSION['viewed'][$slug]) && isset($_SESSION['user_id'])) {
+            $_SESSION['viewed'][$slug] = true;
+            $this->model->increaseArticleCount($slug);
+        }
         $article = $this->model->getBySlug($slug);
         if (is_null($article)) {
             http_response_code(404);
@@ -54,11 +58,5 @@ class ArticleController {
         $this->model->delete($id);
         header('Location: /admin/articles/');
         exit;
-    }
-
-    public function checkView(string $slug): void {
-        if ($_SESSION['user_id'] ?? false && $_SESSION['username'] ?? false) {
-            $this->model->inceaseArticleCount($slug);
-        }
     }
 }

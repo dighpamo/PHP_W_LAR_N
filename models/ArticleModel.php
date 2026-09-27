@@ -196,7 +196,7 @@ class ArticleModel {
         
     }
 
-    public function inceaseArticleCount(string $slug): bool {
+    public function increaseArticleCount(string $slug): bool {
         $stmt = $this->db->prepare("UPDATE articles SET views_count + 1 WHERE slug = :slug");
         return $stmt->execute(['slug' => $slug]);
     }
