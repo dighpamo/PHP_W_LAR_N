@@ -9,7 +9,11 @@ $dotenv->load();
 use Controllers\ArticleController;
 use Controllers\AuthController;
 use Controllers\UserController;
+use Controllers\CategoryController;
+
+use Controllers\AdminCategoryController;
 use Controllers\AdminArticleController;
+use Controllers\AdminUserController;
 
 session_start();
 
@@ -45,6 +49,17 @@ if ($requestUri === "/articles/" || $requestUri === "/articles") {
 if (str_starts_with($requestUri, "/articles/")) {
     $slug = substr($requestUri, strlen('/articles/'));
     (new ArticleController())->show($slug);
+    exit;
+}
+
+if ($requestUri === "/categories/" || $requestUri === "/categories") {
+    (new CategoryController())->showAll();
+    exit;
+}
+
+if (str_starts_with($requestUri, "/categories/")) {
+    $slug = substr($requestUri, strlen('/categories/'));
+    (new CategoryController())->show($slug);
     exit;
 }
 
@@ -100,6 +115,66 @@ if (str_starts_with($requestUri, '/admin')) {
         (new AdminArticleController())->edit((int)$m[1], $_POST);
         exit;
     }
+// КАТ
+    if (($requestUri === '/categories' || $requestUri === '/admin/categories') && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminCategoryController())->showAll();
+        exit;
+    }
+
+    if ($requestUri === '/admin/categories/create' && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminCategoryController())->getForm();
+        exit;
+    }
+
+    if ($requestUri === '/admin/categories' && $_SERVER["REQUEST_METHOD"] === "POST") {
+        (new AdminCategoryController())->create($_POST);
+        exit;
+    }
+
+    if (preg_match('#^/admin/categories/(\d+)/delete$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "POST") {
+        (new AdminCategoryController())->delete((int)$m[1]);
+        exit;
+    }
+
+    if (preg_match('#^/admin/categories/(\d+)$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminCategoryController())->show((int)$m[1]);
+        exit;
+    }
+
+    if (preg_match('#^/admin/categories/(\d+)$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "POST") {
+        (new AdminCategoryController())->edit((int)$m[1], $_POST);
+        exit;
+    }
+
+    if (($requestUri === '/users' || $requestUri === '/admin/users') && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminUserController())->showAll();
+        exit;
+    }
+
+    if ($requestUri === '/admin/users/create' && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminUserController())->getForm();
+        exit;
+    }
+
+    // if ($requestUri === '/admin/users' && $_SERVER["REQUEST_METHOD"] === "POST") {
+    //     (new AdminUserController())->create($_POST);
+    //     exit; <-- тут я задумал, что пока пользователи равны, то пользователь создавать другого не может. Регистрироваться и создавать себя - да, смотреть о других - да, удалять других - да, создавать - нет.
+    //  Но если раскоментить и прокинуть + раскоментить в форме - все равно будет всё работать.
+    // }
+
+    if (preg_match('#^/admin/users/(\d+)/delete$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "POST") {
+        (new AdminUserController())->delete((int)$m[1]);
+        exit;
+    }
+
+    if (preg_match('#^/admin/users/(\d+)$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "GET") {
+        (new AdminUserController())->show((int)$m[1]);
+        exit;
+    }
+    if (preg_match('#^/admin/users/(\d+)$#', $requestUri, $m) && $_SERVER["REQUEST_METHOD"] === "POST") {
+        (new AdminUserController())->edit((int)$m[1], $_POST);
+        exit;
+    }
 
     http_response_code(404);
     renderView('404');
@@ -109,27 +184,6 @@ if (str_starts_with($requestUri, '/admin')) {
 switch ($requestUri) {
     case '/':
         (new ArticleController())->showAll();
-        break;
-
-    case '/admin/articles/form':
-        break;
-
-    case '/admin/categories/':
-        break;
-
-    case '/admin/users/':
-        break;
-
-    case '/admin/users/form':
-        break;
-
-    case '/admin/settings/form':
-        break;
-
-    case '/article':
-        break;
-
-    case '/category':
         break;
 
     default:
