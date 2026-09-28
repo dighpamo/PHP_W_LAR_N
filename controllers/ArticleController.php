@@ -18,7 +18,7 @@ class ArticleController {
         $perPage = (int)($_GET['perPage'] ?? 10) === 10 ? 10 : 10;
         $totalCount = $this->model->getTotalCount();
         $totalPages = (int)ceil($totalCount / $perPage);
-        if ($page > $totalPages) {
+        if ($page > $totalPages && $totalPages > 0) {
             http_response_code(404);
             renderView('404');
             exit;

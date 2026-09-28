@@ -132,7 +132,32 @@ class CategoryModel {
             $cont[] = ':' . $k;
             $val[] = $k;
         }
-        $stmt = $this->db->prepare("INSERT INTO categories (" . implode(", ", $val)  . ") VALUES " . implode(", ", $cont));
+        $stmt = $this->db->prepare("INSERT INTO categories (" . implode(", ", $val)  . ") VALUES (" . implode(", ", $cont) . ")");
         return $stmt->execute($values);
+    }
+
+    public function getTotalCount(): int
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM categories");
+        $stmt->execute();
+        return (int)$stmt->fetchColumn();
+    }
+
+    public function getAdminIndexes(int $page = 1, int $perPage = 10): array
+    {
+        if ($page < 1) {
+            $page = 1;
+        }
+        $stmt = $this->db->prepare(
+            "SELECT id, category_name  
+            FROM categories
+            ORDER BY id
+            LIMIT :perPage 
+            OFFSET :page"
+        );
+        $stmt->bindValue('page', ($page - 1) * $perPage, PDO::PARAM_INT);
+        $stmt->bindValue('perPage', $perPage, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

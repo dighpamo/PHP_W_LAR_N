@@ -8,6 +8,11 @@ use App\Database;
 class UserModel {
     private PDO $db;
 
+    private const BLOCKED = [
+        'id',
+        'created_at'
+    ];
+
     public function __construct() {
         $this->db = Database::pdo();
     }
@@ -42,8 +47,44 @@ class UserModel {
 
     }
 
+    public function update(int $id, array $values): bool
+    {
+        if (empty($values)) {
+            return false;
+        }
+        if (array_intersect(self::BLOCKED, array_keys($values))) {
+            return false;
+        }
+        
+        $cont = array();
+        foreach (array_keys($values) as $k) {
+            $cont[] = $k . '= :' . $k;
+        }
+        $stmt = $this->db->prepare("UPDATE articles SET " . implode(", ", $cont) . " WHERE id = :id");
+        $values['id'] = $id;
+        return $stmt->execute($values);
+    }
+
     public function getAll(): array {
         $stmt = $this->db->prepare("SELECT id, username, created_at FROM users ORDER BY id");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAdminIndexes(int $page = 1, int $perPage = 10): array
+    {
+        if ($page < 1) {
+            $page = 1;
+        }
+        $stmt = $this->db->prepare(
+            "SELECT id, username, created_at  
+            FROM users
+            ORDER BY id
+            LIMIT :perPage 
+            OFFSET :page"
+        );
+        $stmt->bindValue('page', ($page - 1) * $perPage, PDO::PARAM_INT);
+        $stmt->bindValue('perPage', $perPage, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

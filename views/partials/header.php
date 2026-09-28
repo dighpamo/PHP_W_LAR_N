@@ -22,6 +22,9 @@ use Controllers\AuthController; ?>
                 <a href="/">Статьи</a>
                 <a href="/categories">Категории</a>
                 <a href="/creaters">Авторы</a>
+                <?php if ((new AuthController())->checkAuth()): ?>
+                    <a href="/admin">Админка</a>
+                <?php endif; ?>
             </div>
 
             <?php if (!(new AuthController())->checkAuth()): ?>

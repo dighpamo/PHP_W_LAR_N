@@ -17,7 +17,21 @@ class CategoryController
     {
         $page = (int)($_GET['page'] ?? 1);
         $perPage = (int)($_GET['perPage'] ?? 10) === 10 ? 10 : 10;
-        renderView('public/categories', ['categories' => $this->model->getAll($page, $perPage)]);
+        $totalCount = $this->model->getTotalCount();
+        $totalPages = (int)ceil($totalCount / $perPage);
+        if ($page > $totalPages && $totalPages > 0) {
+            http_response_code(404);
+            renderView('404');
+            exit;
+        }
+        renderView(
+            'public/categories',
+            [
+                'categories' => $this->model->getAll($page, $perPage),
+                'totalPages' => $totalPages,
+                'currentPage' => $page,
+            ]
+        );
     }
 
     public function show(string $slug): void

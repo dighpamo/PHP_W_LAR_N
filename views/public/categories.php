@@ -2,21 +2,17 @@
 
 /** @var array $categories */ ?>
 
-<?php require BASE_PATH . '/views/admin_partials/header.php'; ?>
+<?php require BASE_PATH . '/views/partials/header.php'; ?>
 
 <main class="site-main">
-
-    <div class="page-header">
-        <h1 class="page-title">Категории</h1>
-        <a href="/admin/categories/create" class="btn btn--primary">Создать новую категорию</a>
-    </div>
+    <h1 class="page-title">Статьи</h1>
 
     <?php if ($categories): ?>
         <div class="article-list">
             <?php foreach ($categories as $category): ?>
                 <article class="article-card">
                     <h2 class="article-card__title">
-                        <a href="/admin/categories/<?= $category['id'] ?>">
+                        <a href="/articles/<?= htmlspecialchars($category['slug']) ?>">
                             <?= htmlspecialchars($category['category_name']) ?>
                         </a>
                     </h2>
@@ -26,7 +22,8 @@
     <?php else: ?>
         <div class="empty-state">Тут пока ничего нет</div>
     <?php endif; ?>
+    <?php require BASE_PATH . '/views/partials/pagination.php'; ?>
 
 </main>
 
-<?php require BASE_PATH . '/views/admin_partials/footer.php'; ?>
+<?php require BASE_PATH . '/views/partials/footer.php'; ?>

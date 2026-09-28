@@ -51,8 +51,8 @@ class AdminArticleController {
         try {
             $this->model->update($id, $values);
         } catch (\PDOException $e) {
-            // $_SESSION['flash'] = "Что-то пошло не так.";
-            $_SESSION['flash'] = $e->getMessage();
+            $_SESSION['flash'] = "Что-то пошло не так.";
+            // $_SESSION['flash'] = $e->getMessage();
         }
         header('Location: /admin/articles/' . $id);
         exit;
