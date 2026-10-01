@@ -35,7 +35,6 @@ class UserController
             header("Location: /");
             exit;
         }
-
     }
 
     public function login(string $username, string $password): void {

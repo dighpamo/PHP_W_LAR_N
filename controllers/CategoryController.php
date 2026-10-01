@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\ArticleModel;
 use Models\CategoryModel;
 
 class CategoryController
@@ -37,12 +38,16 @@ class CategoryController
     public function show(string $slug): void
     {
         $category = $this->model->getBySlug($slug);
+        $articles = (new ArticleModel())-> getByCategory($category['id']);
         if (is_null($category)) {
             http_response_code(404);
             renderView('404', ['title' => 'Страница не найдена']);
             return;
         }
-        renderView('public/category', ['category' => $category]);
+        renderView('public/category', [
+            'category' => $category,
+            'atrilcles' => $articles,
+        ]);
     }
 
     public function edit(int $id, array $values): void

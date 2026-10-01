@@ -12,7 +12,7 @@
             <?php foreach ($categories as $category): ?>
                 <article class="article-card">
                     <h2 class="article-card__title">
-                        <a href="/articles/<?= htmlspecialchars($category['slug']) ?>">
+                        <a href="/categories/<?= htmlspecialchars($category['slug']) ?>">
                             <?= htmlspecialchars($category['category_name']) ?>
                         </a>
                     </h2>

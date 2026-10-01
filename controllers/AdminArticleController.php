@@ -18,7 +18,8 @@ class AdminArticleController {
     {
         $page = (int)($_GET['page'] ?? 1);
         $perPage = (int)($_GET['perPage'] ?? 10) === 10 ? 10 : 10;
-        renderView('admin/articles/list', ['articles' => $this->model->getAdminIndexes($page, $perPage)]);
+        renderView(
+            'admin/articles/list', ['articles' => $this->model->getAdminIndexes($page, $perPage)]);
     }
 
     public function show(int $id): void
